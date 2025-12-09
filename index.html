@@ -1,75 +1,474 @@
 <!DOCTYPE html>
-<html lang="fr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="fr" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Muller | Confort Thermique</title>
+    <meta name="description" content="Muller SARL - Spécialiste confort thermique, chauffage, plomberie et ventilation à Golbey.">
+    
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Configuration Tailwind & Styles Custom -->
     <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            fontFamily: {
-              sans: ['Inter', 'system-ui', 'sans-serif'],
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'apple-gray': '#f5f5f7',
+                        'apple-dark': '#1d1d1f',
+                        'apple-blue': '#0071e3',
+                        'apple-blue-hover': '#0077ed',
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
+                        'fade-in': 'fadeIn 1s ease-out forwards',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: 0, transform: 'translateY(20px)' },
+                            '100%': { opacity: 1, transform: 'translateY(0)' },
+                        },
+                        fadeIn: {
+                            '0%': { opacity: 0 },
+                            '100%': { opacity: 1 },
+                        },
+                    },
+                },
             },
-            colors: {
-              'apple-gray': '#f5f5f7',
-              'apple-dark': '#1d1d1f',
-              'apple-blue': '#0071e3',
-              'apple-blue-hover': '#0077ed',
-            },
-            animation: {
-              'fade-in-up': 'fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards',
-              'fade-in': 'fadeIn 1s ease-out forwards',
-            },
-            keyframes: {
-              fadeInUp: {
-                '0%': { opacity: 0, transform: 'translateY(20px)' },
-                '100%': { opacity: 1, transform: 'translateY(0)' },
-              },
-              fadeIn: {
-                '0%': { opacity: 0 },
-                '100%': { opacity: 1 },
-              },
-            },
-          },
-        },
-      }
+        }
     </script>
+    
     <style>
-      body {
-        -webkit-font-smoothing: antialiased;
-        -moz-osx-font-smoothing: grayscale;
-      }
-      .glass-nav {
-        background-color: rgba(255, 255, 255, 0.8);
-        backdrop-filter: blur(20px);
-        -webkit-backdrop-filter: blur(20px);
-      }
-      .hide-scrollbar::-webkit-scrollbar {
-        display: none;
-      }
-      .hide-scrollbar {
-        -ms-overflow-style: none;
-        scrollbar-width: none;
-      }
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        .glass-nav {
+            background-color: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        /* Utilitaires d'animation au scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-100 { transition-delay: 0.1s; }
+        .delay-200 { transition-delay: 0.2s; }
+        .delay-300 { transition-delay: 0.3s; }
     </style>
-  <script type="importmap">
+<script type="importmap">
 {
   "imports": {
     "lucide-react": "https://aistudiocdn.com/lucide-react@^0.556.0",
-    "react-dom/client": "https://aistudiocdn.com/react-dom@^19.2.1/client",
-    "react-dom/": "https://aistudiocdn.com/react-dom@^19.2.1/",
-    "react/": "https://aistudiocdn.com/react@^19.2.1/",
-    "react": "https://aistudiocdn.com/react@^19.2.1"
+    "react": "https://aistudiocdn.com/react@^19.2.1",
+    "react/": "https://aistudiocdn.com/react@^19.2.1/"
   }
 }
 </script>
 </head>
-  <body class="bg-white text-apple-dark font-sans selection:bg-apple-blue selection:text-white">
-    <div id="root"></div>
-    <script type="text/babel" data-type="module" src="./index.tsx" data-presets="typescript,react"></script>
-  </body>
+<body class="bg-white text-apple-dark font-sans selection:bg-apple-blue selection:text-white">
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed top-0 w-full z-50 transition-all duration-300 bg-transparent">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0 flex items-center">
+                    <span id="nav-logo" class="text-xl font-semibold tracking-tight text-white transition-colors duration-300">
+                        Muller SARL
+                    </span>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#" class="nav-link text-sm font-medium text-gray-200 hover:text-white transition-colors duration-200">Accueil</a>
+                    <a href="#services" class="nav-link text-sm font-medium text-gray-200 hover:text-white transition-colors duration-200">Savoir-faire</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-gray-200 hover:text-white transition-colors duration-200">Contact</a>
+                    <a href="tel:0329343387" class="bg-apple-blue text-white px-4 py-1.5 rounded-full text-sm font-medium hover:bg-apple-blue-hover transition-colors flex items-center gap-2">
+                        <i data-lucide="phone" width="14" height="14"></i>
+                        03 29 34 33 87
+                    </a>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden flex items-center">
+                    <button id="mobile-menu-btn" class="p-2 rounded-md text-white transition-colors duration-300">
+                        <i data-lucide="menu" id="menu-icon"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Overlay -->
+        <div id="mobile-menu" class="hidden fixed inset-0 z-40 bg-white/95 backdrop-blur-xl pt-20 px-6 animate-fade-in">
+             <div class="flex flex-col space-y-6">
+                <a href="#" class="mobile-link text-2xl font-semibold text-gray-900 border-b border-gray-100 pb-4">Accueil</a>
+                <a href="#services" class="mobile-link text-2xl font-semibold text-gray-900 border-b border-gray-100 pb-4">Savoir-faire</a>
+                <a href="#contact" class="mobile-link text-2xl font-semibold text-gray-900 border-b border-gray-100 pb-4">Contact</a>
+                <a href="tel:0329343387" class="w-full flex justify-center items-center gap-2 bg-apple-blue text-white px-4 py-4 rounded-xl text-lg font-medium mt-4">
+                    <i data-lucide="phone"></i> Appeler maintenant
+                </a>
+             </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative h-screen w-full overflow-hidden bg-gray-900">
+        <!-- Background -->
+        <div class="absolute inset-0 z-0">
+            <img 
+                src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2500" 
+                alt="Intérieur moderne" 
+                class="w-full h-full object-cover animate-fade-in"
+            >
+            <!-- Overlay sombre pour lisibilité -->
+            <div class="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+        </div>
+
+        <div class="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 max-w-5xl mx-auto">
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-bold text-white tracking-tighter mb-6 opacity-0 animate-fade-in-up" style="animation-delay: 0.1s;">
+                Confort thermique.
+                <br />
+                <span class="text-gray-300">Réinventé.</span>
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-200 max-w-2xl font-medium opacity-0 animate-fade-in-up" style="animation-delay: 0.3s;">
+                Plomberie, chauffage et ventilation de précision. 
+                <br class="hidden md:block"/> 
+                Une expertise pensée pour votre habitat durable.
+            </p>
+            
+            <div class="mt-10 opacity-0 animate-fade-in-up" style="animation-delay: 0.5s;">
+               <a 
+                href="#contact"
+                class="group inline-flex items-center gap-2 bg-white text-black px-8 py-3.5 rounded-full text-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:scale-105"
+               >
+                Demander un devis
+                <i data-lucide="arrow-right" class="group-hover:translate-x-1 transition-transform"></i>
+               </a>
+            </div>
+        </div>
+        
+        <!-- Scroll indicator -->
+        <div class="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce opacity-70">
+            <i data-lucide="chevron-down" class="text-white w-8 h-8"></i>
+        </div>
+    </header>
+
+    <!-- Services Section (Bento Grid) -->
+    <section id="services" class="py-24 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto bg-white">
+        <div class="mb-16 text-center reveal">
+            <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-black">
+                Savoir-faire.
+            </h2>
+            <p class="text-xl text-gray-500 font-medium">L'expertise Muller au service de votre maison.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Card 1: Chauffage -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-gray-50 border border-gray-100 p-8 transition-all duration-500 hover:shadow-xl hover:scale-[1.01] md:col-span-2 md:row-span-2 reveal">
+                <div class="relative z-10 flex flex-col h-full justify-between">
+                    <div class="mb-4">
+                        <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-6 text-apple-blue group-hover:scale-110 transition-transform duration-300">
+                            <i data-lucide="flame"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-3 tracking-tight">Chauffage Performance</h3>
+                        <p class="text-gray-600 font-medium leading-relaxed max-w-lg">Installation de chaudières performantes : micro-cogénération, condensation au gaz, bois ou fioul. Une chaleur douce et économique.</p>
+                    </div>
+                    <div class="mt-8 rounded-2xl overflow-hidden h-48 md:h-80 shadow-inner">
+                        <img 
+                            src="https://images.unsplash.com/photo-1507646227500-4d389b0012be?q=80&w=2680&auto=format&fit=crop" 
+                            alt="Chauffage" 
+                            class="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-700"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2: Ventilation -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-gray-50 border border-gray-100 p-8 transition-all duration-500 hover:shadow-xl hover:scale-[1.01] reveal delay-100">
+                <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-6 text-apple-blue group-hover:scale-110 transition-transform duration-300">
+                    <i data-lucide="wind"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3 tracking-tight">Ventilation</h3>
+                <p class="text-gray-600 font-medium leading-relaxed">Systèmes de ventilation adaptés à votre habitat pour une qualité d'air optimale et saine.</p>
+            </div>
+
+            <!-- Card 3: Plomberie -->
+            <div class="group relative overflow-hidden rounded-[2rem] bg-gray-50 border border-gray-100 p-8 transition-all duration-500 hover:shadow-xl hover:scale-[1.01] reveal delay-200">
+                <div class="w-12 h-12 rounded-full bg-white shadow-sm flex items-center justify-center mb-6 text-apple-blue group-hover:scale-110 transition-transform duration-300">
+                    <i data-lucide="droplets"></i>
+                </div>
+                <h3 class="text-2xl font-bold text-gray-900 mb-3 tracking-tight">Plomberie Sanitaire</h3>
+                <p class="text-gray-600 font-medium leading-relaxed">Experts plombiers pour toutes vos installations d'eau, dépannages et rénovations de salle de bain.</p>
+            </div>
+
+            <!-- Card 4: Certifications (Dark) -->
+            <div class="md:col-span-2 reveal delay-100">
+                <div class="relative overflow-hidden rounded-[2rem] bg-black p-8 md:p-12 text-white">
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="flex-1 z-10">
+                            <div class="flex items-center gap-3 mb-4">
+                                <i data-lucide="leaf" class="text-green-400"></i>
+                                <span class="text-green-400 font-bold uppercase tracking-wider text-sm">Éco-Responsable</span>
+                            </div>
+                            <h3 class="text-3xl md:text-4xl font-bold mb-4">Certifié pour l'avenir.</h3>
+                            <p class="text-gray-400 text-lg leading-relaxed mb-6">
+                                Nos certifications Qualibat RGE et Professionnel du Gaz garantissent des solutions respectueuses de l'environnement et éligibles aux aides de l'État.
+                            </p>
+                            <div class="flex flex-wrap gap-4">
+                                <span class="px-4 py-2 bg-white/10 backdrop-blur rounded-lg text-sm font-semibold border border-white/20">Qualibat RGE</span>
+                                <span class="px-4 py-2 bg-white/10 backdrop-blur rounded-lg text-sm font-semibold border border-white/20">Professionnel du Gaz</span>
+                            </div>
+                        </div>
+                        <div class="flex-1 h-full w-full rounded-2xl overflow-hidden relative min-h-[200px]">
+                            <img src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?q=80&w=2670&auto=format&fit=crop" class="absolute inset-0 w-full h-full object-cover opacity-80 hover:opacity-100 transition-opacity duration-500" alt="Eco home" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info & Contact Section -->
+    <section id="contact" class="py-24 bg-apple-gray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 reveal">
+                <h2 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 text-black">
+                    Nous trouver.
+                </h2>
+                <p class="text-xl text-gray-500 font-medium">Une question ? Un projet ? Venez nous rencontrer.</p>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Hours Card -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex flex-col reveal">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="p-3 bg-blue-50 text-apple-blue rounded-full">
+                            <i data-lucide="clock" width="24" height="24"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Horaires</h3>
+                    </div>
+                    
+                    <div class="space-y-4 flex-grow">
+                        <!-- Lundi -->
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="font-medium text-gray-900">Lundi</span>
+                            <span class="font-medium text-gray-600">08h00 - 17h30</span>
+                        </div>
+                        <!-- Mardi -->
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="font-medium text-gray-900">Mardi</span>
+                            <span class="font-medium text-gray-600">08h00 - 17h30</span>
+                        </div>
+                        <!-- Mercredi -->
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="font-medium text-gray-900">Mercredi</span>
+                            <span class="font-medium text-gray-600">08h00 - 17h30</span>
+                        </div>
+                        <!-- Jeudi -->
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="font-medium text-gray-900">Jeudi</span>
+                            <span class="font-medium text-gray-600">08h00 - 17h30</span>
+                        </div>
+                        <!-- Vendredi -->
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="font-medium text-gray-900">Vendredi</span>
+                            <span class="font-medium text-gray-600">08h00 - 17h30</span>
+                        </div>
+                        <!-- Samedi -->
+                        <div class="flex justify-between items-center py-2 border-b border-gray-50">
+                            <span class="font-medium text-gray-900">Samedi</span>
+                            <span class="font-medium text-gray-400 italic">Fermé</span>
+                        </div>
+                        <!-- Dimanche -->
+                        <div class="flex justify-between items-center py-2">
+                            <span class="font-medium text-gray-900">Dimanche</span>
+                            <span class="font-medium text-gray-400 italic">Fermé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Card -->
+                <div class="bg-white rounded-[2rem] p-8 shadow-sm border border-gray-100 flex flex-col lg:col-span-2 reveal delay-100">
+                    <div class="flex items-center gap-3 mb-8">
+                        <div class="p-3 bg-blue-50 text-apple-blue rounded-full">
+                            <i data-lucide="map-pin" width="24" height="24"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Contact & Localisation</h3>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 h-full">
+                        <div class="space-y-8">
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Adresse</h4>
+                                <p class="text-xl font-medium text-gray-900 leading-snug">
+                                    4 allée Marronniers Prolongée<br>
+                                    88190 Golbey
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="text-sm font-semibold text-gray-400 uppercase tracking-wider mb-2">Téléphone</h4>
+                                <a href="tel:0329343387" class="text-3xl font-bold text-apple-blue hover:text-apple-blue-hover transition-colors inline-flex items-center gap-2">
+                                    03 29 34 33 87
+                                    <i data-lucide="arrow-right"></i>
+                                </a>
+                            </div>
+
+                            <div class="pt-4">
+                                <a 
+                                    href="https://maps.google.com/?q=4+allée+Marronniers+Prolongée+88190+Golbey" 
+                                    target="_blank" 
+                                    rel="noreferrer"
+                                    class="inline-flex items-center justify-center w-full md:w-auto px-8 py-4 bg-black text-white rounded-full font-semibold hover:bg-gray-800 transition-colors"
+                                >
+                                    Itinéraire GPS
+                                </a>
+                            </div>
+                        </div>
+
+                        <!-- Map Visual -->
+                        <div class="relative h-64 md:h-full w-full rounded-2xl overflow-hidden bg-gray-100 border border-gray-200 group">
+                            <img 
+                                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=2674&auto=format&fit=crop" 
+                                alt="Map background" 
+                                class="absolute inset-0 w-full h-full object-cover grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-80 transition-all duration-500"
+                            />
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="bg-white/90 backdrop-blur-md px-6 py-3 rounded-xl shadow-lg flex items-center gap-2 transform group-hover:-translate-y-2 transition-transform duration-300">
+                                    <i data-lucide="map-pin" class="text-red-500"></i>
+                                    <span class="font-bold text-gray-900">Golbey</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-white border-t border-gray-100 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <p class="text-gray-400 text-sm">
+                    © 2024 Muller SARL. Tous droits réservés.
+                </p>
+            </div>
+            <div class="flex gap-6 text-sm font-medium text-gray-500">
+                <a href="#" class="hover:text-apple-blue transition-colors">Mentions légales</a>
+                <a href="#" class="hover:text-apple-blue transition-colors">Politique de confidentialité</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        // Initialisation des icônes Lucide
+        lucide.createIcons();
+
+        // Navbar Logic
+        const navbar = document.getElementById('navbar');
+        const navLogo = document.getElementById('nav-logo');
+        const navLinks = document.querySelectorAll('.nav-link');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const menuIcon = document.getElementById('menu-icon');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        let isMenuOpen = false;
+
+        function updateNavbar() {
+            if (window.scrollY > 20 || isMenuOpen) {
+                navbar.classList.add('glass-nav');
+                navLogo.classList.replace('text-white', 'text-black');
+                mobileMenuBtn.classList.replace('text-white', 'text-black');
+                navLinks.forEach(link => {
+                    link.classList.replace('text-gray-200', 'text-gray-600');
+                    link.classList.replace('hover:text-white', 'hover:text-black');
+                });
+            } else {
+                navbar.classList.remove('glass-nav');
+                navLogo.classList.replace('text-black', 'text-white');
+                mobileMenuBtn.classList.replace('text-black', 'text-white');
+                navLinks.forEach(link => {
+                    link.classList.replace('text-gray-600', 'text-gray-200');
+                    link.classList.replace('hover:text-black', 'hover:text-white');
+                });
+            }
+        }
+
+        window.addEventListener('scroll', updateNavbar);
+
+        // Mobile Menu Logic
+        mobileMenuBtn.addEventListener('click', () => {
+            isMenuOpen = !isMenuOpen;
+            
+            // Toggle Menu Icon
+            if (isMenuOpen) {
+                mobileMenu.classList.remove('hidden');
+                menuIcon.setAttribute('data-lucide', 'x');
+                document.body.style.overflow = 'hidden'; // Prevent scroll
+            } else {
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                document.body.style.overflow = '';
+            }
+            lucide.createIcons();
+            updateNavbar();
+        });
+
+        // Close mobile menu when clicking a link
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                isMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+                menuIcon.setAttribute('data-lucide', 'menu');
+                document.body.style.overflow = '';
+                lucide.createIcons();
+                updateNavbar();
+            });
+        });
+
+        // Scroll Reveal Animation
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            const elementVisible = 150;
+            
+            revealElements.forEach((reveal) => {
+                const elementTop = reveal.getBoundingClientRect().top;
+                if (elementTop < windowHeight - elementVisible) {
+                    reveal.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        // Trigger once on load
+        revealOnScroll();
+
+    </script>
+</body>
 </html>
