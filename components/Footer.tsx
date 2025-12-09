@@ -1,5 +1,5 @@
 import React from 'react';
-import { BUSINESS_INFO } from '../constants';
+import { BUSINESS_INFO } from '../constants.ts';
 
 const Footer: React.FC = () => {
   return (

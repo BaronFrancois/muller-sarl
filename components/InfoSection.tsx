@@ -1,6 +1,6 @@
 import React from 'react';
 import { Clock, MapPin, Phone, Mail, ArrowRight } from 'lucide-react';
-import { WORKING_HOURS, BUSINESS_INFO } from '../constants';
+import { WORKING_HOURS, BUSINESS_INFO } from '../constants.ts';
 
 const InfoSection: React.FC = () => {
   return (

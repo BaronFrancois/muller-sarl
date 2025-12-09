@@ -1,9 +1,9 @@
 import React from 'react';
-import Navbar from './components/Navbar';
-import Hero from './components/Hero';
-import BentoGrid from './components/BentoGrid';
-import InfoSection from './components/InfoSection';
-import Footer from './components/Footer';
+import Navbar from './components/Navbar.tsx';
+import Hero from './components/Hero.tsx';
+import BentoGrid from './components/BentoGrid.tsx';
+import InfoSection from './components/InfoSection.tsx';
+import Footer from './components/Footer.tsx';
 
 function App() {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Flame, Wind, Droplets, Leaf } from 'lucide-react';
-import { ServiceItem } from '../types';
+import { ServiceItem } from '../types.ts';
 
 interface CardProps {
   service: ServiceItem;

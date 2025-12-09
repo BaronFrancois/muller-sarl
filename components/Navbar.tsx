@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Phone } from 'lucide-react';
-import { BUSINESS_INFO } from '../constants';
+import { BUSINESS_INFO } from '../constants.ts';
 
 const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);

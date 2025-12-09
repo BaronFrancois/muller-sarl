@@ -1,4 +1,4 @@
-import { WorkingHour, BusinessInfo, Certification } from './types';
+import { WorkingHour, BusinessInfo, Certification } from './types.ts';
 
 export const BUSINESS_INFO: BusinessInfo = {
   name: "Muller SARL",

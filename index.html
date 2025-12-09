@@ -6,6 +6,7 @@
     <title>Muller | Confort Thermique</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
     <script>
       tailwind.config = {
         theme: {
@@ -69,6 +70,6 @@
 </head>
   <body class="bg-white text-apple-dark font-sans selection:bg-apple-blue selection:text-white">
     <div id="root"></div>
-    <script type="module" src="./index.tsx"></script>
+    <script type="text/babel" data-type="module" src="./index.tsx" data-presets="typescript,react"></script>
   </body>
 </html>

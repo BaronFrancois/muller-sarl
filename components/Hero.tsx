@@ -6,11 +6,11 @@ const Hero: React.FC = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img 
-          src="https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=2664&auto=format&fit=crop" 
+          src="https://images.unsplash.com/photo-1600607686527-6fb886090705?q=80&w=2500" 
           alt="Intérieur moderne et confortable" 
           className="w-full h-full object-cover animate-fade-in"
         />
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-[2px]"></div>
       </div>
 
       <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 max-w-5xl mx-auto">
