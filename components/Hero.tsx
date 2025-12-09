@@ -10,7 +10,7 @@ const Hero: React.FC = () => {
           alt="Intérieur moderne et confortable" 
           className="w-full h-full object-cover animate-fade-in"
         />
-        <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+        <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]"></div>
       </div>
 
       <div className="relative z-10 flex flex-col justify-center items-center h-full text-center px-4 max-w-5xl mx-auto">
